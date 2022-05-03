@@ -1,0 +1,82 @@
+<div class="main-content">
+  <div class="container-fluid">
+     
+      <div class="row">
+       
+        <div class="col-lg-6 col-md-12">
+            <div class="card">
+                <div class="card-header card-header-success">
+                    <h4 class="card-title">Calcule Moyenne Matiére</h4>
+                    <select class="form-control" (change)="moyenne_matiere($event)">
+                        <option></option>
+                        <option *ngFor="let matiere of matieres" [value]="matiere._id">{{matiere.nom_matiere}}</option>
+                    </select>
+                </div>
+                <div class="card-body table-responsive">
+                    <table class="table table-hover">
+                        <thead class="text-success">
+                            <th>#</th>
+                            <th>Eléve</th>
+                            <th>Niveau d'etudes</th>
+                            <th>Note</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let note of matieres_notes ; let i = index">
+                                <td>{{i+1}}</td>
+                                <td>{{note.etudiant?.nom}} {{note.etudiant?.prenom}}</td>
+                                <td>{{note.etudiant?.niveau_etudes}}</td>
+                                <td>{{note.note}}</td>
+                            </tr>
+                            
+                        </tbody>
+                        <tfoot *ngIf="matiere_moyenne" class="text-danger">
+                            <tr>
+                                <td></td>
+                                <td> <b>Moyenne : </b> </td>
+                                <td> <b>{{matiere_moyenne | number}} </b></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+          <div class="col-lg-6 col-md-12">
+            <div class="card">
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title">Calcule Moyenne Eleve</h4>
+                    <select class="form-control" (change)="moyenne_etudiant($event)">
+                        <option></option>
+                        <option *ngFor="let etudiant of etudiants" [value]="etudiant._id">{{etudiant.nom}} {{etudiant.prenom}}</option>
+                    </select>
+                </div>
+                <div class="card-body table-responsive">
+                    <table class="table table-hover">
+                        <thead class="text-primary">
+                            <th>#</th>
+                            <th>Matiére</th>
+                            <th>Coefficient</th>
+                            <th>Note</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let note of etudiants_notes ; let i = index">
+                                <td>{{i+1}}</td>
+                                <td>{{note.matiere?.nom_matiere}}</td>
+                                <td>{{note.matiere?.coefficient}}</td>
+                                <td>{{note.note}}</td>
+                            </tr>
+                            
+                        </tbody>
+                        <tfoot *ngIf="etudiant_moyenne" class="text-danger">
+                            <tr>
+                                <td colspan="2"></td>
+                                <td><b>Moyenne : </b></td>
+                                <td><b>{{etudiant_moyenne | number}}</b></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+      </div>
+  </div>
+</div>

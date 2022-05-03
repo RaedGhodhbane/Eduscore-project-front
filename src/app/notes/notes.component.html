@@ -1,0 +1,132 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Liste des Notes</h4>
+
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="offset-md-8 col-md-4">
+                                <button class="btn btn-primary btn-block btn-fill" data-toggle="modal"
+                                    data-target="#buy" (click)="ajouterForm()">
+                                    Ajouter
+                                </button>
+                                <!-- Buy-Modal-angular -->
+                                <div class="modal modal-angular fade" id="buy" tabindex="-1" role="dialog"
+                                    aria-labelledby="myModalLabel">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content" >
+                                            <div class="modal-body text-center">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="margin-top">
+                                                   
+                                                </h4>
+                                                <form [formGroup]="form">
+                                                    <div class="form-group">
+                                                        <label style="float: left;">Matiere</label>
+                                                        <select formControlName="matiere" class="form-control" >
+                                                            <option></option>
+                                                            <option *ngFor="let matiere of matieres" [value]="matiere._id" [selected]="form.get('matiere').value && form.get('matiere').value._id == matiere._id">
+                                                              {{matiere.nom_matiere}}
+                                                            </option>
+                                                        </select>
+
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label style="float: left;">Elève</label>
+                                                        <select formControlName="etudiant" class="form-control">
+                                                            <option *ngFor="let etudiant of etudiants" [value]="etudiant._id"  [selected]="form.get('etudiant').value && form.get('etudiant').value._id == etudiant._id">
+                                                                {{etudiant.nom}} {{etudiant.prenom}}
+                                                            </option>
+                                                        </select>
+
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label style="float: left;">Note</label>
+                                                        <input type="number" max="20" min="0" step="0.5"
+                                                            formControlName="note" class="form-control">
+
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-success" [disabled]="!form.valid" data-dismiss="modal"
+                                                aria-label="Close"
+                                                    (click)="set()">Enregistrer</button>
+                                                <button class="btn btn-default"data-dismiss="modal"
+                                                aria-label="Close"
+                                                    (click)="annuler()">Annuler</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                    <th>
+                                        #
+                                    </th>
+                                    <th>
+                                        Matière
+                                    </th>
+                                    <th>
+                                        Elève
+                                    </th>
+                                    <th>
+                                        Note
+                                    </th>
+                                    <th>
+                                       
+                                    </th>
+                                    <th>
+                                       
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of liste_notes ; let i = index">
+                                        <td>
+                                            {{i+1}}
+                                        </td>
+                                        <td>
+                                            {{item.matiere?.nom_matiere}}
+                                        </td>
+                                        <td>
+                                            {{ item.etudiant?.nom }}
+                                            {{ item.etudiant?.prenom }}
+                                        </td>
+                                        <td>
+                                            {{item.note}}
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-warning" (click)="modifierForm(item)"  data-toggle="modal"
+                                            data-target="#buy">
+                                                Modifier
+                                            </button>
+                                        </td>
+                                        <td class="text-primary">
+                                            <button class="btn btn-danger" (click)="supprimer(item._id)">
+                                                Supprimer
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
